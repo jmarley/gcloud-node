@@ -1,7 +1,7 @@
 = Google Cloud and JBoss Wildfly
 
 This project is an exploration into how gcloud can be used to spin up JBoss
-Wildfly in googles paas offering on Google Compute Engine
+Wildfly in googles PaaS offering on Google Compute Engine
 
 == Configure
 
