@@ -1,10 +1,69 @@
-= Google Cloud and JBoss Wildfly
+= Google Cloud and Node, and Quay.io
 
-This project is an exploration into how gcloud can be used to spin up JBoss
-Wildfly in googles PaaS offering on Google Compute Engine
 
-== Configure
+This project is an exploration into how gcloud can be used to spin up node js
+app in googles PaaS offering on Google Compute Engine. I thought it would be
+cool as well to use CoreOS registry; Quay.io
 
 == Deploy
 
+[source,bash]
+----
+$ sh ./scripts/create-cluster.sh
+----
+
 == Test
+
+=== Container Testing
+.Build Image
+By default when the project is pushed to github and build is created on the fly
+by Quay.io
+
+.Run Container
+[source,bash]
+----
+$ docker run -d -p 8080:8080 --name hello-world quay.io/jmarley/gcloud-testing
+----
+.Test Container
+[source,bash]
+----
+$ curl http://localhost:8080
+Hello World!%
+----
+
+=== Kubernetes deployment status
+
+[source,bash]
+----
+$ kubectl get deployments
+NAME          DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+hello-world   1         1         1            1           6m
+----
+[source,bash]
+----
+$ kubectl get pods
+NAME                           READY     STATUS    RESTARTS   AGE
+hello-world-4289250167-yuod8   1/1       Running   0          39s
+----
+
+.External access
+[source,bash]
+----
+$ kubectl get service                                                                                                                     [12:20:14]
+NAME          CLUSTER-IP      EXTERNAL-IP     PORT(S)    AGE
+hello-world   10.107.244.49   104.198.99.39   8080/TCP   1m
+kubernetes    10.107.240.1    <none>          443/TCP    48m-
+----
+
+.Endpoint is up
+[source,bash]
+----
+$ curl http://104.198.99.39:8080
+Hello World!%
+----
+
+== Cleanup
+[source,bash]
+----
+$ sh ./scripts/cleanup.sh
+----
