@@ -3,7 +3,10 @@
 
 This project is an exploration into how gcloud can be used to spin up node js
 app in googles PaaS offering on Google Compute Engine. I thought it would be
-cool as well to use CoreOS registry; Quay.io
+cool as well to use CoreOS registry; Quay.io.
+
+There isn't anything special about this project, it was just something I wanted
+to do and follow the k8's guide to see some differences between it and OSE.
 
 == Deploy
 
@@ -67,3 +70,7 @@ Hello World!%
 ----
 $ sh ./scripts/cleanup.sh
 ----
+
+== References
+
+. http://kubernetes.io/docs/hellonode/#introduction[Kubernetes hello world quickstart]
